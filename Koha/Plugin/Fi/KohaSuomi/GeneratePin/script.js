@@ -34,6 +34,7 @@ $(document).ready(function () {
                     $("#newpassword").attr('type', 'text');
                     $("#newpassword2").val(password);
                     $("#newpassword2").attr('type', 'text');
+                    return;
                 }
                 else {
                     var pattern_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,}/;
