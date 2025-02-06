@@ -31,5 +31,8 @@ Once set up is complete you will need to alter your UseKohaPlugins system prefer
 
 # Configuring
 
-Here is the place for configurations
+In configuration you can set to which patron categories four numbered PIN code is generated.
+
+![kuva](https://github.com/user-attachments/assets/32086f31-e8dd-4d95-b495-e5e782c4f374)
+
 
