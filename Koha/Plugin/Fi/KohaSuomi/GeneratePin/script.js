@@ -1,5 +1,30 @@
-/// ALKU  ///
-/// Tällä muutetaan määrittelyssä mainituille asiakastyypeille salasanan generointi nelinumeroiseksi. Ilman tätä, asiakkaille tulee aakkosnumeerisia salasanoja ///
+// --- TRANSLATIONS ---
+const GENERATE_PIN_TRANSLATIONS = {
+  "en": {
+    password_generated: "PIN password generated!",
+    password_generation_failed: "Password generation failed!"
+  },
+  "fi": {
+    password_generated: "PIN-salasana luotu!",
+    password_generation_failed: "Salasanan luonti epäonnistui!"
+  },
+  "sv": {
+    password_generated: "PIN-lösenord genererat!",
+    password_generation_failed: "Lösenordsgenerering misslyckades!"
+  }
+};
+
+function gt(key, ...args) {
+  // Detect language, default to 'en'
+  const lang = (window.LANG || navigator.language || "en").substring(0,2);
+  const dict = GENERATE_PIN_TRANSLATIONS[lang] || GENERATE_PIN_TRANSLATIONS["en"];
+  const val = dict[key];
+  return typeof val === "function" ? val(...args) : val;
+}
+
+// --- ORIGINAL SCRIPT WITH TRANSLATIONS ---
+/// Generates a four-digit PIN code password for patrons with specific categories
+/// Without this, patrons would get alphanumeric passwords
 
 /* Generoi henkilöasiakkaalle PIN-koodi salasanaksi */
 function generate_patron_password() {
@@ -50,5 +75,4 @@ $(document).ready(function () {
         });
     }
 });
-
-/// LOPPU ///
+/// END OF SCRIPT ///

@@ -1,13 +1,18 @@
 [% USE KohaDates %]
+[% TRY %]
+    [% PROCESS "$PLUGIN_DIR/i18n/${LANG}.inc" %]
+[% CATCH %]
+    [% PROCESS "$PLUGIN_DIR/i18n/default.inc" %]
+[% END %]
 [% INCLUDE 'doc-head-open.inc' %]
- <title>IntranetUserJS: Generate PIN codes Configuration</title>
+ <title>[% T.title %] - [% T.configuration %]</title>
 [% INCLUDE 'doc-head-close.inc' %]
 </head>
 <body>
 [% INCLUDE 'header.inc' %]
 [% INCLUDE 'cat-search.inc' %]
 
-<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo; IntranetUserJS: Generate PIN codes &rsaquo; Configuration</div>
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">[% T.home %]</a> &rsaquo; <a href="/cgi-bin/koha/plugins/plugins-home.pl">[% T.plugins %]</a> &rsaquo; [% T.title %] &rsaquo; [% T.configuration %]</div>
 
 <div id="doc3" style="margin-left: 10px;">
 
@@ -19,24 +24,24 @@
 
         <p>
 
-        <label for="config_param_a">Asiakastyypit, joille generoidaan nelinumeroinen salasana pilkuilla erotettuna (Esim. HENKILO,LAPSI): </label>
+        <label for="config_param_a">[% T.config_label %]</label>
         <input type="text" name="config_param_a" size="50" value="[% config_param_a %]" />
 
         <p>
 
         <input type="hidden" name="save" value="1" />
 
-        <input type="submit" value="Save configuration" />
+        <input type="submit" value="[% T.save %]" />
     </form>
 
     <hr/>
 
     <p>
-        <h5>Upgrade status</h5>
+        <h5>[% T.upgrade_status %]</h5>
         [% IF last_upgraded %]
-            Plugin was last upgraded on this system on [% last_upgraded | $KohaDates with_hours => 1 %]
+            [% T.last_upgraded %] [% last_upgraded | $KohaDates with_hours => 1 %]
         [% ELSE %]
-            Plugin has never been upgraded.
+            [% T.never_upgraded %]
         [% END %]
     </p>
 
