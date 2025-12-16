@@ -7,6 +7,7 @@ use Modern::Perl;
 use base qw(Koha::Plugins::Base);
 ## We will also need to include any Koha libraries we want to access
 use C4::Context;
+use C4::Languages;
 use utf8;
 use File::Slurp;
 
@@ -25,6 +26,23 @@ our $metadata = {
     description     => "Luo määritetyille asiakastyypeille nelinumeroiset PIN-koodit salasanaksi. (Paikalliskannat)",
 };
 
+sub get_localized_metadata {
+    my ($self) = @_;
+    my $lang = C4::Languages::getlanguage($self->{cgi}) || 'en';
+    my ($name, $description);
+    $name = "IntranetUserJS: Generate PIN codes";
+
+    if ( $lang eq 'sv-SE' ) {
+        $description = "Generera fyrsiffriga PIN-koder som lösenord för angivna kundkategorier.";
+    } elsif ( $lang eq 'fi-FI' ) {
+        $description = "Luo määritetyille asiakastyypeille nelinumeroiset PIN-koodit salasanaksi. (Paikalliskannat)";
+    } else {
+        $description = "Generate four-digit PIN codes as passwords for specified patron categories.";
+    }
+
+    return ($name, $description);
+}
+
 ## This is the minimum code required for a plugin's 'new' method
 ## More can be added, but none should be removed
 sub new {
@@ -38,6 +56,10 @@ sub new {
     ## This runs some additional magic and checking
     ## and returns our actual
     my $self = $class->SUPER::new($args);
+
+    my ($name, $description) = $self->get_localized_metadata();
+    $self->{metadata}->{name} = $name;
+    $self->{metadata}->{description} = $description;
 
     return $self;
 }
